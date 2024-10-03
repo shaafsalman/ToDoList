@@ -1,18 +1,18 @@
-package com.example.todolist;
+package com.example.todolist.ui;
 
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import android.widget.Button;
 
+import com.example.todolist.R;
 import com.example.todolist.model.Task;
-import com.example.todolist.ui.ActiveTasksFragment;
-import com.example.todolist.ui.AllTasksFragment;
-import com.example.todolist.ui.TaskDetailActivity;
-import com.example.todolist.ui.TaskDetailFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +22,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+        WindowInsetsControllerCompat insetsController =
+                WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView());
 
+        insetsController.hide(WindowInsetsCompat.Type.statusBars() | WindowInsetsCompat.Type.navigationBars());
+        insetsController.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
         btnActiveTasks = findViewById(R.id.btnActiveTasks);
         btnAllTasks = findViewById(R.id.btnAllTasks);
 

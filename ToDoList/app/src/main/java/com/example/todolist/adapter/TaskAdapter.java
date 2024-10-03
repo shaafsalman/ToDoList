@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.todolist.MainActivity;
+import com.example.todolist.ui.MainActivity;
 import com.example.todolist.R;
 import com.example.todolist.model.Task;
 import com.example.todolist.utility.TaskManager;
