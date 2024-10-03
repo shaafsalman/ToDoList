@@ -56,13 +56,6 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    public void updateAllTasksFragment() {
-        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
-        if (currentFragment instanceof AllTasksFragment) {
-            ((AllTasksFragment) currentFragment).updateTaskList();
-        }
-    }
-
     public boolean isInLandscapeMode() {
         return getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }

@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.todolist.ui.MainActivity;
@@ -62,7 +64,16 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         } else {
             holder.btnComplete.setVisibility(View.GONE);
             holder.btnDelete.setVisibility(View.VISIBLE);
-
+            holder.itemView.setOnClickListener(v -> {
+                if (context instanceof MainActivity) {
+                    MainActivity mainActivity = (MainActivity) context;
+                    if (mainActivity.isInLandscapeMode()) {
+                        mainActivity.showTaskDetailsInFragment(task);
+                    } else {
+                        mainActivity.showTaskDetails(task);
+                    }
+                }
+            });
             holder.btnDelete.setOnClickListener(v -> {
                 if (deleteTaskListener != null) {
                     deleteTaskListener.onDeleteTask(position);
@@ -110,6 +121,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             return;
         }
 
+
         Task task = taskList.get(position);
         task.setCompleted(true);
 
@@ -124,6 +136,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
         taskList.remove(position);
         notifyItemRemoved(position);
+        Toast.makeText(context, "Task '" + task.getTitle() + "' completed!", Toast.LENGTH_SHORT).show();
+
     }
 
     public void deleteTask(int position) {
